@@ -25,7 +25,7 @@ public class main {
         school=scanner.nextLine();
 
         try{
-            parser par = new parser(path,unit,school);
+            parser par = new parser(path,school,unit);
             par.parse();
 
         }catch(Exception ex){
