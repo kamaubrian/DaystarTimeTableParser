@@ -1,5 +1,7 @@
 package com.parser.control;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
@@ -18,6 +20,7 @@ public class parser {
     private String unit;
     private XSSFWorkbook table;
     private XSSFSheet Sheet;
+
 
 
     public parser(String file, String school,String unit) throws FileNotFoundException {
@@ -45,6 +48,19 @@ public class parser {
             }
 
 
+        }
+        private static int findRow(XSSFSheet sheet, String cellCont){
+            int rownum=0;
+            for(Row row : sheet){
+                for(Cell cell : row){
+                    if (cell.getCellType() ==Cell.CELL_TYPE_STRING){
+                        if(cell.getRichStringCellValue().getString().trim()==cellCont){
+                            return row.getRowNum();
+                        }
+                    }
+                }
+            }
+            return 0;
         }
 
 
