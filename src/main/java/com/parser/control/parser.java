@@ -1,5 +1,6 @@
 package com.parser.control;
 
+import org.apache.poi.ss.formula.functions.Column;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -16,7 +17,7 @@ public class parser {
 
 
     private String file;
-    private String school;
+    private final String school;
     private String unit;
     private XSSFWorkbook table;
     private XSSFSheet Sheet;
@@ -37,31 +38,17 @@ public class parser {
             System.out.println("Sheets:"+sheets);
             System.out.println("School:"+school);
             System.out.println("Processing:"+unit);
-            boolean schol = true;
+
             for(int i =0;i < sheets;i++){
                 Sheet=table.getSheetAt(i);
-                Sheet = table.getSheetAt(i);
                 if(Sheet.getSheetName().toLowerCase().contains(school.toLowerCase())){
-                    schol= true;
-               }
-
-            }
-
-
-        }
-        private static int findRow(XSSFSheet sheet, String cellCont){
-            int rownum=0;
-            for(Row row : sheet){
-                for(Cell cell : row){
-                    if (cell.getCellType() ==Cell.CELL_TYPE_STRING){
-                        if(cell.getRichStringCellValue().getString().trim()==cellCont){
-                            return row.getRowNum();
-                        }
-                    }
+                    System.out.println("Sheet Found");
+                    break;
+                }else{
+                    System.out.println("Sheet Not Found");
+                    break;
                 }
+
             }
-            return 0;
         }
-
-
 }
