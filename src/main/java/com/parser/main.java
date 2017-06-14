@@ -27,6 +27,7 @@ public class main {
         try{
             parser par = new parser(path,school,unit);
             par.parse();
+            par.getDetails(unit);
 
         }catch(Exception ex){
             System.out.println(ex.getClass());

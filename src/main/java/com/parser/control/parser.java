@@ -1,13 +1,15 @@
 package com.parser.control;
 
-import org.apache.poi.ss.formula.functions.Column;
+
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 
 /**
@@ -21,6 +23,7 @@ public class parser {
     private String unit;
     private XSSFWorkbook table;
     private XSSFSheet Sheet;
+    private DataFormatter formatter;
 
 
 
@@ -50,5 +53,34 @@ public class parser {
                 }
 
             }
+        }
+        public ArrayList<String> getDetails(String... unit) throws Exception{  /*Can Receive Multiple String Arguments*/
+            ArrayList details = new ArrayList();
+
+            boolean found;
+            int row, col;
+            for(String units : unit) {
+              //e  units = units.trim();
+                for (Row _row : Sheet) {
+                    found=false;
+                    for(Cell cell : _row){
+                    String text=cell.getStringCellValue();
+                        if(!(text==null) && text.toLowerCase().contains(units.toLowerCase())){
+                            row=cell.getRowIndex();
+                            col=cell.getColumnIndex();
+                            System.out.println("Unit Found"+row+col);
+                            details.add(row);
+                            details.add(col);
+                            break;
+                        }else{
+                            System.out.println("Unit Not Found");
+                            break;
+                        }
+
+                    }
+
+                }
+            }
+            return details;
         }
 }
