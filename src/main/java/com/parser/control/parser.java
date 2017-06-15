@@ -4,12 +4,16 @@ package com.parser.control;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -60,7 +64,7 @@ public class parser {
             boolean found;
             int row, col;
             for(String units : unit) {
-              //e  units = units.trim();
+
                 for (Row _row : Sheet) {
                     found=false;
                     for(Cell cell : _row){
@@ -68,19 +72,28 @@ public class parser {
                         if(!(text==null) && text.toLowerCase().contains(units.toLowerCase())){
                             row=cell.getRowIndex();
                             col=cell.getColumnIndex();
-                            System.out.println("Unit Found"+row+col);
+                            System.out.println("Unit Found on:Row"+row+"\nColumn"+col);
                             details.add(row);
                             details.add(col);
                             break;
-                        }else{
-                            System.out.println("Unit Not Found");
-                            break;
                         }
+
 
                     }
 
                 }
             }
             return details;
+        }
+        private Date getDate(int row, int col) throws Exception{
+            XSSFRow _row;
+            XSSFCell cel;
+            Calendar date = Calendar.getInstance();
+
+
+
+
+
+            return date.getTime();
         }
 }
